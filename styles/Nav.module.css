@@ -1,0 +1,60 @@
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100px;
+    width: 100%;
+    transition: all 0.5s;
+    z-index: 2;
+}
+
+.navContents {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    height: 100px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.Logo {
+    padding-left: 20px;
+    font-size: 30px;
+    color: hsla(0, 0%, 100%, .7);
+    cursor: pointer;
+}
+
+.navContent {
+    display:flex;
+}
+
+.navElement {
+    font-size: 20px;
+    margin: 0 10px;
+    text-decoration: none;
+    padding: 5px;
+    color: hsla(0, 0%, 100%, .7);
+    cursor: pointer;
+}
+
+.navWhite {
+    background-color: #fff;
+}
+
+.Logo:hover,
+.navElement:hover {
+    color: #fff;
+    transition: all 0.5s;
+}
+
+.LogoWhite,
+.navElementWhite {
+    color: #453a33;
+    transition: all 0.5s;
+}
+
+.LogoWhite:hover,
+.navElementWhite:hover {
+    color: #f4623a;
+}

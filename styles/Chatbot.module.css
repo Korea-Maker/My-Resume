@@ -1,0 +1,32 @@
+.chatbot {
+    position: fixed;
+    bottom: 20px;
+    right: 59.5px;
+    width: 70px;
+    height: 70px;
+
+}
+
+.chatbotBtn {
+    width: 70px;
+    height: 70px;
+    background-color: #f8f9fa;
+    border: 1px solid #f8f9fa;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chatbotImg {
+    width: 60px;
+    height: 60px;
+}
+
+.chatbotImg:hover,
+.chatbotBtn:hover {
+    scale: 1.25;
+    transition: all 0.3s;
+}

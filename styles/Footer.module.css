@@ -1,0 +1,9 @@
+.footerContent {
+    display: flex;
+    justify-content: center;
+}
+
+.footerElement {
+    margin: 10px;
+    cursor: pointer;
+}
