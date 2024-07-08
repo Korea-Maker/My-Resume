@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "../styles/Chatbot.module.css";
 import axios from "axios";
 
@@ -7,19 +7,26 @@ function Chatbot() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = useRef(null);
 
   const handleChatbot = () => {
     setIsChatbotVisible(!isChatbotVisible);
   };
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const sendMessage = () => {
     const getChatbotResponse = async () => {
       try {
         const response = await axios.post(
           "http://localhost:5050/chat",
-          { question: input,
-            thread_id: ""
-           },
+          { question: input },
           {
             headers: {
               "Content-Type": "application/json",
@@ -69,7 +76,6 @@ function Chatbot() {
               <div
                 key={index}
                 className={`${styles.message} ${message.user === "me" ? styles.me : styles.bot}`}
-                style={message.user === "me" ? { textAlign: "right" } : { textAlign: "left" }}
               >
                 <p>{message.text}</p>
               </div>
@@ -79,6 +85,7 @@ function Chatbot() {
                 <p>Loading...</p>
               </div>
             )}
+            <div ref={messagesEndRef} />
           </div>
           <div className={styles.chatInputContainer}>
             <input
