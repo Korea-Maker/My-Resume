@@ -3,7 +3,7 @@
   bottom: 20px;
   right: 59.5px;
   width: 70px;
-  height: 70px;
+  z-index: 1000;
 }
 
 .chatbotBtn {
@@ -33,8 +33,8 @@
 .chatbotContainer {
   display: flex;
   flex-direction: column;
-  height: 500px;
-  width: 300px;
+  height: 600px;
+  width: 400px;
   border: 1px solid #ccc;
   border-radius: 5px;
   overflow: hidden;
@@ -53,10 +53,12 @@
 }
 
 .chatMessages {
-  flex: 1px;
+  flex: 1;
   padding: 10px;
   overflow-y: auto;
   background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
 }
 
 .chatInputContainer {
@@ -81,4 +83,27 @@
 
 .sendButton:hover {
   background-color: #005bb5;
+}
+
+.message {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 80%;
+  display: inline-block;
+}
+
+.message.me {
+  background-color: #daf8e3;
+  align-self: flex-end;
+}
+
+.message.bot {
+  background-color: #f1f0f0;
+  align-self: flex-start;
+}
+
+.loading {
+  text-align: center;
+  color: #888;
 }

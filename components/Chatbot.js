@@ -1,19 +1,52 @@
 import React, { useState } from "react";
 import styles from "../styles/Chatbot.module.css";
+import axios from "axios";
 
 function Chatbot() {
   const [isChatbotVisible, setIsChatbotVisible] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChatbot = () => {
     setIsChatbotVisible(!isChatbotVisible);
   };
 
   const sendMessage = () => {
+    const getChatbotResponse = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:5050/chat",
+          { question: input,
+            thread_id: ""
+           },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log(response.data); // Log the entire response object to debug if needed
+        const botResponse = response.data.response;
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { text: botResponse, user: "bot" },
+        ]);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     if (input.trim()) {
-      setMessages([...messages, { text: input, user: "me" }]);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { text: input, user: "me" },
+      ]);
       setInput(""); // Reset input field after sending a message
+      setIsLoading(true);
+      getChatbotResponse(); // Call the function to get the response from the bot
     }
   };
 
@@ -35,11 +68,17 @@ function Chatbot() {
             {messages.map((message, index) => (
               <div
                 key={index}
-                style={{ textAlign: message.user === "me" ? "right" : "left" }}
+                className={`${styles.message} ${message.user === "me" ? styles.me : styles.bot}`}
+                style={message.user === "me" ? { textAlign: "right" } : { textAlign: "left" }}
               >
                 <p>{message.text}</p>
               </div>
             ))}
+            {isLoading && (
+              <div className={styles.loading}>
+                <p>Loading...</p>
+              </div>
+            )}
           </div>
           <div className={styles.chatInputContainer}>
             <input
