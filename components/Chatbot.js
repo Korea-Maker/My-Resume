@@ -109,9 +109,14 @@ function Chatbot() {
               value={input}
               placeholder="Type a message..."
               onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+              onKeyUp={(e) => e.key === "Enter" && !isLoading && sendMessage()}
+              disabled={isLoading} // Disable input when loading
             />
-            <button className={styles.sendButton} onClick={sendMessage}>
+            <button
+              className={styles.sendButton}
+              onClick={sendMessage}
+              disabled={isLoading} // Disable button when loading
+            >
               Send
             </button>
           </div>
