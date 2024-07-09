@@ -109,7 +109,7 @@ function Chatbot() {
               value={input}
               placeholder="Type a message..."
               onChange={(e) => setInput(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && sendMessage()}
+              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             />
             <button className={styles.sendButton} onClick={sendMessage}>
               Send
