@@ -41,7 +41,7 @@ function Chatbot() {
             },
           }
         );
-        console.log(response.data); // Log the entire response object to debug if needed
+        
         const botResponse = response.data.response;
         const responseThreadId = response.data.thread_id;
 
