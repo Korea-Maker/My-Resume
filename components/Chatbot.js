@@ -23,10 +23,18 @@ function Chatbot() {
 
   const sendMessage = () => {
     const getChatbotResponse = async () => {
+      const threadId = localStorage.getItem("thread_id");
+      const requestData = {
+        question: input
+      };
+      if (threadId) {
+        requestData.thread_id = threadId;
+      }
+
       try {
         const response = await axios.post(
           "http://localhost:5050/chat",
-          { question: input },
+          requestData,
           {
             headers: {
               "Content-Type": "application/json",
@@ -35,6 +43,13 @@ function Chatbot() {
         );
         console.log(response.data); // Log the entire response object to debug if needed
         const botResponse = response.data.response;
+        const responseThreadId = response.data.thread_id;
+
+        // Save thread_id to localStorage
+        if (responseThreadId) {
+          localStorage.setItem("thread_id", responseThreadId);
+        }
+
         setMessages((prevMessages) => [
           ...prevMessages,
           { text: botResponse, user: "bot" },
