@@ -1,9 +1,11 @@
 .footerContent {
     display: flex;
     justify-content: center;
+    z-index: 1000;
 }
 
 .footerElement {
     margin: 10px;
     cursor: pointer;
+    z-index: 1000;
 }

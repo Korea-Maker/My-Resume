@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "../styles/Nav.module.css";
-import Banner from "./Banner";
 
 function Nav() {
   const [show, setShow] = useState(false); // nav 스크롤 감지 상태
@@ -46,7 +45,7 @@ return (
         </ul>
       </div>
     </div>
-    <Banner />
+    
   </>
 );
 }
