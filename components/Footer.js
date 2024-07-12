@@ -25,6 +25,7 @@ function Footer() {
           </li>
         </Link>
       </ul>
+      <div className={styles.footerCopyRight}>© 2024. Jong Wook LEE All rights reserved.</div>
     </div>
   );
 }

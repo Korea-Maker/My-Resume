@@ -1,3 +1,8 @@
+.footer {
+    height: 11rem;
+    padding-top: 3rem;
+    background-color: #222;
+}
 .footerContent {
     display: flex;
     justify-content: center;
@@ -11,14 +16,27 @@
 }
 
 .fontawesome {
-    font-size: 30px;
+    font-size: 40px;
     z-index: 1000;
+    color: white;
 }
 
-.tistory {
+.fontawesome:hover {
+    opacity: 1;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footerCopyRight {
+    margin-top: 1rem;
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+    z-index: 1000;
+}
+/* .tistory {
     color: rgb(255, 72, 0);
 }
 
 .linkedin {
     color: #0077B5;
-}
+} */
