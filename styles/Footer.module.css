@@ -9,3 +9,16 @@
     cursor: pointer;
     z-index: 1000;
 }
+
+.fontawesome {
+    font-size: 30px;
+    z-index: 1000;
+}
+
+.tistory {
+    color: rgb(255, 72, 0);
+}
+
+.linkedin {
+    color: #0077B5;
+}
