@@ -1,0 +1,57 @@
+.aboutMeBox {
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    max-width: 71.25rem;
+    width: 100%;
+}
+
+.titleBox {
+    margin: 0 auto 3rem;
+    display: table;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.infoBox {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    -webkit-box-pack: justify;
+}
+
+.contentBox {
+    width: 33.3333%;
+    margin-bottom: 2rem;
+}
+
+.content {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    max-width: 14rem;
+    margin: 0 auto;
+    opacity: .8;
+}
+
+.infoImg {
+    font-size: 32px;
+    margin-top: .2rem;
+    margin-right: 2rem;
+}
+
+.contentLabel {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: .5rem;
+}
+
+.contentValue {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .contentBox {
+        width: 100%;
+    }
+}

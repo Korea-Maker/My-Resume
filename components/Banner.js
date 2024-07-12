@@ -8,8 +8,8 @@ function Banner() {
       <div className={styles.bannerContent}>
         <div className={styles.bannerTitle}>
           - 이종욱 -
-          <br />
-          .......
+          <br /><br />
+          Information Security Engineer
         </div>
       </div>
     </>

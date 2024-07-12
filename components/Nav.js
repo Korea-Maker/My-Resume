@@ -27,7 +27,7 @@ return (
           <h1 className={`${styles.Logo} ${show && styles.LogoWhite}`}>LJW's Portfolio</h1>
         </Link>
         <ul className={styles.navContent}>
-          <Link href="#">
+          <Link href="#AboutMe">
             <li className={`${styles.navElement} ${show && styles.navElementWhite}`}>About Me</li>
           </Link>
           <Link href="#">
