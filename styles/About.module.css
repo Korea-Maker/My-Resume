@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap');
+
 .aboutMeBox {
     margin: 0 auto;
     padding: 4rem 2rem;
@@ -8,8 +10,19 @@
 .titleBox {
     margin: 0 auto 3rem;
     display: table;
-    font-size: 2rem;
-    font-weight: 700;
+    line-height: 1.5;
+    font-family: 'Lato', sans-serif; /* Using Lato with a fallback to sans-serif */
+    font-size: 2rem; /* Assuming 2rem is appropriate, adjust as needed */
+    font-weight: 700; /* Bold weight to make the title stand out */
+    letter-spacing: 0.05em; /* Adding some spacing to improve legibility */
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.5); /* Optional text shadow for better readability on variable backgrounds */
+}
+
+.title {
+    display: table-cell;
+    vertical-align: middle;
+    border-bottom: 2px solid #555050;
+    padding-bottom: .5rem;
 }
 
 .infoBox {
