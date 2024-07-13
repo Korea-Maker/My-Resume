@@ -47,6 +47,7 @@
     box-shadow: 1rem 1rem 1rem 0 rgba(68, 68, 68, .2);
     -webkit-box-shadow: 1rem 1rem 1rem 0 rgba(68, 68, 68, .2);
     text-align: center;
+    word-wrap: break-word; /* Ensure long words break to the next line */
 }
 
 .stackTitle {
@@ -58,18 +59,22 @@
     padding-bottom: .5rem;
     border-bottom: 2px solid #555050;
     color: #e74c3c; /* Set title color */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis for overflow text */
 }
 
 .stackList {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    margin-top: 1rem;
+    justify-content: space-between;
+    gap: 10px;
 }
 
 .stackImg {
     width: 3rem;
     height: 3rem;
+    margin: 5px;
 }
 
 .stackImg:hover {
@@ -80,10 +85,6 @@
 @media (max-width: 768px) {
     .technicalStack {
         width: calc(50% - 1rem); /* Two items per row on tablets */
-    }
-
-    .stackList {
-        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
     }
 
     .stackImg {
@@ -103,10 +104,6 @@
 
     .stackTitle {
         font-size: 1.2rem; /* Adjust stack title font size for mobile */
-    }
-
-    .stackList {
-        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
     }
 
     .stackImg {
