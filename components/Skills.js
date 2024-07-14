@@ -7,7 +7,7 @@ function Skills() {
       <div className={styles.contentBox}>
         <div className={styles.titleBox}>
           <div className={styles.title}>
-            Skills
+            SKILLS
           </div>
         </div>
         <div className={styles.stackContainer}>
@@ -16,16 +16,46 @@ function Skills() {
               Frontend
             </div>
             <div className={styles.stackList}>
-              <Image src="/frontend.png" alt="frontend" width={100} height={100} className={styles.stackImg} />
-              <Image src="/frontend.png" alt="frontend" width={100} height={100} className={styles.stackImg} />
-              <Image src="/frontend.png" alt="frontend" width={100} height={100} className={styles.stackImg} />
-              <Image src="/frontend.png" alt="frontend" width={100} height={100} className={styles.stackImg} />
-              <Image src="/frontend.png" alt="frontend" width={100} height={100} className={styles.stackImg} />
-              <Image src="/frontend.png" alt="frontend" width={100} height={100} className={styles.stackImg} />
-              <Image src="/frontend.png" alt="frontend" width={100} height={100} className={styles.stackImg} />
-              <Image src="/frontend.png" alt="frontend" width={100} height={100} className={styles.stackImg} />
-              <Image src="/frontend.png" alt="frontend" width={100} height={100} className={styles.stackImg} />
-              <Image src="/frontend.png" alt="frontend" width={100} height={100} className={styles.stackImg} />
+              <div className={styles.stackImgContainer}>
+                <Image src="/html5.png" alt="html5" width={100} height={100} className={styles.stackImg} />
+                <div className={styles.stackImgText}>HTML5</div>
+              </div>
+              <div className={styles.stackImgContainer}>
+                <Image src="/css.png" alt="css" width={100} height={100} className={styles.stackImg} />
+                <div className={styles.stackImgText}>CSS</div>
+              </div>
+              <div className={styles.stackImgContainer}>
+                <Image src="/javascript.png" alt="javascript" width={100} height={100} className={styles.stackImg} />
+                <div className={styles.stackImgText}>JavaScript</div>
+              </div>
+              <div className={styles.stackImgContainer}>
+                <Image src="/react.png" alt="react" width={100} height={100} className={styles.stackImg} />
+                <div className={styles.stackImgText}>React</div>
+              </div>
+              <div className={styles.stackImgContainer}>
+                <Image src="/frontend.png" alt="frontend" width={100} height={100} className={styles.stackImg} />
+                <div className={styles.stackImgText}>Frontend</div>
+              </div>
+              <div className={styles.stackImgContainer}>
+                <Image src="/frontend.png" alt="frontend" width={100} height={100} className={styles.stackImg} />
+                <div className={styles.stackImgText}>Frontend</div>
+              </div>
+              <div className={styles.stackImgContainer}>
+                <Image src="/frontend.png" alt="frontend" width={100} height={100} className={styles.stackImg} />
+                <div className={styles.stackImgText}>Frontend</div>
+              </div>
+              <div className={styles.stackImgContainer}>
+                <Image src="/frontend.png" alt="frontend" width={100} height={100} className={styles.stackImg} />
+                <div className={styles.stackImgText}>Frontend</div>
+              </div>
+              <div className={styles.stackImgContainer}>
+                <Image src="/frontend.png" alt="frontend" width={100} height={100} className={styles.stackImg} />
+                <div className={styles.stackImgText}>Frontend</div>
+              </div>
+              <div className={styles.stackImgContainer}>
+                <Image src="/frontend.png" alt="frontend" width={100} height={100} className={styles.stackImg} />
+                <div className={styles.stackImgText}>Frontend</div>
+              </div>
             </div>
           </div>
           <div className={styles.technicalStack}>
@@ -33,7 +63,10 @@ function Skills() {
               Backend
             </div>
             <div className={styles.stackList}>
-              <Image src="/images/backend.png" alt="HTML5" width={50} height={50} />
+              <div className={styles.stackImgContainer}>
+                <Image src="/frontend.png" alt="backend" width={100} height={100} className={styles.stackImg} />
+                <div className={styles.stackImgText}>Backend</div>
+              </div>
             </div>
           </div>
           <div className={styles.technicalStack}>
@@ -41,7 +74,10 @@ function Skills() {
               CI/CD
             </div>
             <div className={styles.stackList}>
-              <Image src="/images/html5.png" alt="HTML5" width={50} height={50} />
+              <div className={styles.stackImgContainer}>
+                <Image src="/frontend.png" alt="CI/CD" width={100} height={100} className={styles.stackImg} />
+                <div className={styles.stackImgText}>CI/CD</div>
+              </div>
             </div>
           </div>
           <div className={styles.technicalStack}>
@@ -49,7 +85,10 @@ function Skills() {
               Observability
             </div>
             <div className={styles.stackList}>
-              <Image src="/images/html5.png" alt="HTML5" width={50} height={50} />
+              <div className={styles.stackImgContainer}>
+                <Image src="/frontend.png" alt="observability" width={100} height={100} className={styles.stackImg} />
+                <div className={styles.stackImgText}>Observability</div>
+              </div>
             </div>
           </div>
           <div className={styles.technicalStack}>
@@ -57,7 +96,10 @@ function Skills() {
               Security
             </div>
             <div className={styles.stackList}>
-              <Image src="/images/html5.png" alt="HTML5" width={50} height={50} />
+              <div className={styles.stackImgContainer}>
+                <Image src="/frontend.png" alt="security" width={100} height={100} className={styles.stackImg} />
+                <div className={styles.stackImgText}>Security</div>
+              </div>
             </div>
           </div>
           <div className={styles.technicalStack}>
@@ -65,7 +107,10 @@ function Skills() {
               Cloud
             </div>
             <div className={styles.stackList}>
-              <Image src="/images/html5.png" alt="HTML5" width={50} height={50} />
+              <div className={styles.stackImgContainer}>
+                <Image src="/frontend.png" alt="cloud" width={100} height={100} className={styles.stackImg} />
+                <div className={styles.stackImgText}>Cloud</div>
+              </div>
             </div>
           </div>
           <div className={styles.technicalStack}>
@@ -73,7 +118,10 @@ function Skills() {
               Certificate
             </div>
             <div className={styles.stackList}>
-              <Image src="/images/html5.png" alt="HTML5" width={50} height={50} />
+              <div className={styles.stackImgContainer}>
+                <Image src="/frontend.png" alt="certificate" width={100} height={100} className={styles.stackImg} />
+                <div className={styles.stackImgText}>Certificate</div>
+              </div>
             </div>
           </div>
         </div>
