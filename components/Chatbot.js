@@ -85,7 +85,7 @@ function Chatbot() {
       </div>
       {isChatbotVisible && (
         <div className={styles.chatbotContainer}>
-          <div className={styles.chatHeader}>Chatbot</div>
+          <div className={styles.chatHeader}>AI Chatbot</div>
           <div className={styles.chatMessages}>
             {messages.map((message, index) => (
               <div

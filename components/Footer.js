@@ -11,17 +11,17 @@ function Footer() {
       <ul className={styles.footerContent}>
         <Link href="https://maker5587.tistory.com/">
           <li className={styles.footerElement}>
-            <FontAwesomeIcon icon={faT} className={`${styles.fontawesome} ${styles.tistory}`} />
+            <FontAwesomeIcon icon={faT} className={styles.fontawesome} />
           </li>
         </Link>
         <Link href="#">
           <li className={styles.footerElement}>
-            <FontAwesomeIcon icon={faLinkedin} className={`${styles.fontawesome} ${styles.linkedin}`} />
+            <FontAwesomeIcon icon={faLinkedin} className={styles.fontawesome} />
           </li>
         </Link>
         <Link href="https://github.com/Korea-Maker">
           <li className={styles.footerElement}>
-            <FontAwesomeIcon icon={faGithub} className={styles.fontawesome}/>
+            <FontAwesomeIcon icon={faGithub} className={styles.fontawesome} />
           </li>
         </Link>
       </ul>

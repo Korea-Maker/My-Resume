@@ -6,6 +6,10 @@ export default function Home() {
     <>
       <Head>
         <title>My Resume</title>
+        <meta property="og:title" content="LJW's Portfolio" />
+        <meta property="og:description" content="Jongwook, LEE Portfolio Web Site (feat. AI Chatbot)" />
+        <meta property="og:image" content="https://raw.githubusercontent.com/Korea-Maker/My-Resume/main/public/favicon.ico" />
+        <meta property="og:type" content="website" />
       </Head>
     </>
   );
