@@ -33,7 +33,7 @@ function Chatbot() {
 
       try {
         const response = await axios.post(
-          "http://3.38.179.102/:5050/chat",
+          "http://3.38.179.102:5050/chat",
           requestData,
           {
             headers: {
