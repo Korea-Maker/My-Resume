@@ -39,7 +39,7 @@
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     flex-shrink: 0;
-    width: calc(25% - 1rem);
+    flex-grow: 1; /* Allow the box to grow */
     margin: 0.5rem;
     padding: 1.5rem;
     border-radius: 1rem;
@@ -48,6 +48,10 @@
     -webkit-box-shadow: 1rem 1rem 1rem 0 rgba(68, 68, 68, .2);
     text-align: center;
     word-wrap: break-word; /* Ensure long words break to the next line */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribute space evenly */
+    align-items: center;
 }
 
 .stackTitle {
@@ -55,13 +59,14 @@
     font-weight: 700;
     letter-spacing: 0.05em;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-    margin: 0 auto;
+    margin-bottom: 1rem;
     padding-bottom: .5rem;
     border-bottom: 2px solid #555050;
     color: #e74c3c; /* Set title color */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis; /* Add ellipsis for overflow text */
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .stackList {
@@ -69,13 +74,13 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
+    flex-grow: 1; /* Allow the list to grow and take available space */
 }
 
 .stackImgContainer {
     position: relative;
     width: 5rem;
     height: 5rem;
-    /* margin: 5px 5px 0px 5px; */
     margin: 5px;
 }
 
