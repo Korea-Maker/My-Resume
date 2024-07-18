@@ -33,7 +33,7 @@ function Chatbot() {
 
       try {
         const response = await axios.post(
-          "http://api.jongwook.xyz/chat",
+          "https://api.jongwook.xyz/chat",
           requestData,
           {
             headers: {
