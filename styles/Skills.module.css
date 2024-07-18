@@ -67,14 +67,15 @@
 .stackList {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     gap: 10px;
 }
 
 .stackImgContainer {
     position: relative;
-    width: 3rem;
-    height: 3rem;
+    width: 5rem;
+    height: 5rem;
+    /* margin: 5px 5px 0px 5px; */
     margin: 5px;
 }
 
@@ -112,8 +113,8 @@
     }
 
     .stackImgContainer {
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 4rem;
+        height: 4rem;
     }
 }
 
@@ -131,7 +132,7 @@
     }
 
     .stackImgContainer {
-        width: 2rem;
-        height: 2rem; /* Adjust image size for mobile */
+        width: 3rem;
+        height: 3rem; /* Adjust image size for mobile */
     }
 }

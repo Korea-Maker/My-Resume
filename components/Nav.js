@@ -30,7 +30,7 @@ return (
           <Link href="#AboutMe">
             <li className={`${styles.navElement} ${show && styles.navElementWhite}`}>About Me</li>
           </Link>
-          <Link href="#">
+          <Link href="#skills">
             <li className={`${styles.navElement} ${show && styles.navElementWhite}`}>Skills</li>
           </Link>
           <Link href="#">
