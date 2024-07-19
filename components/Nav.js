@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "../styles/Nav.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 function Nav() {
-  const [show, setShow] = useState(false); // nav 스크롤 감지 상태
+  const [show, setShow] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const scrollNavbar = () => {
     if (window.scrollY > 50) {
@@ -17,37 +20,51 @@ function Nav() {
     window.addEventListener("scroll", scrollNavbar);
     return () => window.removeEventListener("scroll", scrollNavbar);
   }, []);
-  
 
-return (
-  <>
-    <div className={`${styles.nav} ${show && styles.navWhite}`}>
-      <div className={styles.navContents}>
-        <Link href="/">
-          <h1 className={`${styles.Logo} ${show && styles.LogoWhite}`}>LJW's Portfolio</h1>
-        </Link>
-        <ul className={styles.navContent}>
-          <Link href="#AboutMe">
-            <li className={`${styles.navElement} ${show && styles.navElementWhite}`}>About Me</li>
+  const handleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
+  const handleNavElementClick = () => {
+    closeMenu();
+  };
+
+  return (
+    <>
+      <div className={`${styles.nav} ${show && styles.navWhite}`}>
+        <div className={styles.navContents}>
+          <Link href="/">
+            <h1 className={`${styles.Logo} ${show && styles.LogoWhite}`}>LJW's Portfolio</h1>
           </Link>
-          <Link href="#skills">
-            <li className={`${styles.navElement} ${show && styles.navElementWhite}`}>Skills</li>
-          </Link>
-          <Link href="#">
-            <li className={`${styles.navElement} ${show && styles.navElementWhite}`}>Projects</li>
-          </Link>
-          <Link href="#">
-            <li className={`${styles.navElement} ${show && styles.navElementWhite}`}>Carrer</li>
-          </Link>
-          <Link href="#">
-            <li className={`${styles.navElement} ${show && styles.navElementWhite}`}>Personal Statement</li>
-          </Link>
-        </ul>
+          <ul className={`${styles.navContent} ${menuOpen && styles.navContentMobile}`}>
+            <Link href="#AboutMe">
+              <li className={`${styles.navElement} ${show && styles.navElementWhite}`} onClick={handleNavElementClick}>About Me</li>
+            </Link>
+            <Link href="#skills">
+              <li className={`${styles.navElement} ${show && styles.navElementWhite}`} onClick={handleNavElementClick}>Skills</li>
+            </Link>
+            <Link href="#">
+              <li className={`${styles.navElement} ${show && styles.navElementWhite}`} onClick={handleNavElementClick}>Projects</li>
+            </Link>
+            <Link href="#">
+              <li className={`${styles.navElement} ${show && styles.navElementWhite}`} onClick={handleNavElementClick}>Career</li>
+            </Link>
+            <Link href="#">
+              <li className={`${styles.navElement} ${show && styles.navElementWhite}`} onClick={handleNavElementClick}>Personal Statement</li>
+            </Link>
+          </ul>
+          <button className={styles.barbutton} onClick={handleMenu}>
+            <FontAwesomeIcon icon={faBars} className={styles.bars} />
+          </button>
+        </div>
+        {menuOpen && <div className={styles.menuBackground} onClick={closeMenu}></div>}
       </div>
-    </div>
-    
-  </>
-);
+    </>
+  );
 }
 
 export default Nav;
