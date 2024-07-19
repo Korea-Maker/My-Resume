@@ -42,3 +42,37 @@
     text-align: center; /* Centering the text */
     padding-top: 50px;
 }
+
+@media (max-width: 768px) {
+    .bannerImg {
+        height: 400px;
+    }
+    .bannerContent {
+        height: 400px;
+    }
+    .bannerTitle {
+        font-size: 2rem;
+        padding-top: 170px;
+    }
+    .roleDescription {
+        font-size: 1.5rem;
+        padding-top: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .bannerImg {
+        height: 300px;
+    }
+    .bannerContent {
+        height: 300px;
+    }
+    .bannerTitle {
+        font-size: 1.5rem;
+        padding-top: 150px;
+    }
+    .roleDescription {
+        font-size: 1rem;
+        padding-top: 20px;
+    }
+}
