@@ -89,7 +89,10 @@
       color: #453a33;
       cursor: pointer;
       background-color: #fff;
-      
+    }
+    .bars:hover {
+        color: #f4623a;
+        transition: all 0.3s;
     }
     .navContent {
       display: none;

@@ -22,10 +22,10 @@
 }
 
 .bannerTitle {
-    font-family: 'Nunito Sans', sans-serif; /* Using Nunito Sans for a clean, professional look */
+    font-family: 'Nunito Sans', sans-serif;
     font-size: 3rem;
-    color: #ffffff; /* White color for high contrast */
-    letter-spacing: 0.1em; /* Moderate spacing to enhance readability */
+    color: #ffffff;
+    letter-spacing: 0.1em;
     font-weight: 700;
     text-align: center;
     padding-top: 200px;
@@ -34,12 +34,12 @@
 
 
 .roleDescription {
-    font-family: 'Nunito Sans', sans-serif; /* Consistency with the title */
-    font-size: 2.75rem; /* Smaller size for the subtitle */
-    font-weight: 600; /* Regular weight for the role description */
-    color: #ffffff; /* Maintaining the same color for consistency */
-    letter-spacing: 0.05em; /* Slightly tighter letter spacing for the subtitle */
-    text-align: center; /* Centering the text */
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 2.75rem;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+    text-align: center;
     padding-top: 50px;
 }
 
