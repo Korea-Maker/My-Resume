@@ -53,9 +53,6 @@ function Nav() {
             <Link href="#">
               <li className={`${styles.navElement} ${show && styles.navElementWhite}`} onClick={handleNavElementClick}>Career</li>
             </Link>
-            <Link href="#">
-              <li className={`${styles.navElement} ${show && styles.navElementWhite}`} onClick={handleNavElementClick}>Personal Statement</li>
-            </Link>
           </ul>
           <button className={styles.barbutton} onClick={handleMenu}>
             <FontAwesomeIcon icon={faBars} className={styles.bars} />
