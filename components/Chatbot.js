@@ -58,7 +58,7 @@ function Chatbot() {
         console.error(error);
         setMessages((prevMessages) => [
           ...prevMessages,
-          { text: "에러가 발생하여 잠시후 다시 시도 해주시길 바랍니다. 지속적인 에러 발생 시 project5587@gmail.com 로 문의 바랍니다.", user: "bot" },]);
+          { text: error.response.data.response, user: "bot" },]);
       } finally {
         setIsLoading(false);
       }
