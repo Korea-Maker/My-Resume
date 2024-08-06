@@ -128,4 +128,24 @@
     width: 90%;
     height: 75%;
   }
+  .chatHeader {
+    padding: 15px;
+    font-size: 1em;
+  }
+  .chatMessages {
+    padding: 10px;
+  }
+  .chatInput {
+    padding: 10px;
+    font-size: 0.8em;
+  }
+  .sendButton {
+    padding: 10px;
+    font-size: 0.8em;
+  }
+  .message {
+    padding: 10px;
+    font-size: 0.8em;
+  }
+  
 }
