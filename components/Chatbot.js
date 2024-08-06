@@ -8,10 +8,28 @@ function Chatbot() {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
+  const chatbotContainerRef = useRef(null);
 
   const handleChatbot = () => {
     setIsChatbotVisible(!isChatbotVisible);
   };
+
+  const handleClickOutside = (event) => {
+    if (chatbotContainerRef.current && !chatbotContainerRef.current.contains(event.target)) {
+      setIsChatbotVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isChatbotVisible) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isChatbotVisible]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -41,7 +59,7 @@ function Chatbot() {
             },
           }
         );
-        
+
         const botResponse = response.data.response;
         const responseThreadId = response.data.thread_id;
 
@@ -58,7 +76,8 @@ function Chatbot() {
         console.error(error);
         setMessages((prevMessages) => [
           ...prevMessages,
-          { text: error.response.data.response, user: "bot" },]);
+          { text: error.response.data.response, user: "bot" },
+        ]);
       } finally {
         setIsLoading(false);
       }
@@ -87,41 +106,43 @@ function Chatbot() {
         </button>
       </div>
       {isChatbotVisible && (
-        <div className={styles.chatbotContainer}>
-          <div className={styles.chatHeader}>AI Chatbot</div>
-          <div className={styles.chatMessages}>
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`${styles.message} ${message.user === "me" ? styles.me : styles.bot}`}
+        <div className={styles.overlay} onClick={handleChatbot}>
+          <div className={styles.chatbotContainer} ref={chatbotContainerRef} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.chatHeader}>AI Chatbot</div>
+            <div className={styles.chatMessages}>
+              {messages.map((message, index) => (
+                <div
+                  key={index}
+                  className={`${styles.message} ${message.user === "me" ? styles.me : styles.bot}`}
+                >
+                  <p>{message.text}</p>
+                </div>
+              ))}
+              {isLoading && (
+                <div className={styles.loading}>
+                  <p>Loading...</p>
+                </div>
+              )}
+              <div ref={messagesEndRef} />
+            </div>
+            <div className={styles.chatInputContainer}>
+              <input
+                type="text"
+                className={styles.chatInput}
+                value={input}
+                placeholder="Type a message..."
+                onChange={(e) => setInput(e.target.value)}
+                onKeyUp={(e) => e.key === "Enter" && !isLoading && sendMessage()}
+                disabled={isLoading} // Disable input when loading
+              />
+              <button
+                className={styles.sendButton}
+                onClick={sendMessage}
+                disabled={isLoading} // Disable button when loading
               >
-                <p>{message.text}</p>
-              </div>
-            ))}
-            {isLoading && (
-              <div className={styles.loading}>
-                <p>Loading...</p>
-              </div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
-          <div className={styles.chatInputContainer}>
-            <input
-              type="text"
-              className={styles.chatInput}
-              value={input}
-              placeholder="Type a message..."
-              onChange={(e) => setInput(e.target.value)}
-              onKeyUp={(e) => e.key === "Enter" && !isLoading && sendMessage()}
-              disabled={isLoading} // Disable input when loading
-            />
-            <button
-              className={styles.sendButton}
-              onClick={sendMessage}
-              disabled={isLoading} // Disable button when loading
-            >
-              Send
-            </button>
+                Send
+              </button>
+            </div>
           </div>
         </div>
       )}
