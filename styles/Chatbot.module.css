@@ -123,6 +123,34 @@
   color: #888;
 }
 
+.suggestedQuestions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+  background-color: white;
+  border-top: 1px solid #ccc;
+}
+
+.suggestedQuestionBtn {
+  background-color: rgba(0, 120, 212, 0.9);
+  color: white;
+  border: none;
+  margin: 5px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.suggestedQuestionBtn:hover {
+  background-color: rgba(0, 120, 212, 1);
+}
+
+.suggestedQuestionBtn:disabled {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
 @media (max-width: 768px) {
   .chatbot {
     bottom: 10px;
@@ -151,5 +179,4 @@
     padding: 10px;
     font-size: 0.8em;
   }
-  
 }

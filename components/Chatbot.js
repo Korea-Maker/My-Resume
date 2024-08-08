@@ -7,6 +7,12 @@ function Chatbot() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [suggestedQuestions, setSuggestedQuestions] = useState([
+    "추천 질문 1",
+    "추천 질문 2",
+    "추천 질문 3"
+  ]);
+
   const messagesEndRef = useRef(null);
   const chatbotContainerRef = useRef(null);
 
@@ -39,11 +45,11 @@ function Chatbot() {
     scrollToBottom();
   }, [messages]);
 
-  const sendMessage = () => {
+  const sendMessage = (question) => {
     const getChatbotResponse = async () => {
       const threadId = localStorage.getItem("thread_id");
       const requestData = {
-        question: input
+        question: question || input
       };
       if (threadId) {
         requestData.thread_id = threadId;
@@ -62,6 +68,7 @@ function Chatbot() {
 
         const botResponse = response.data.response;
         const responseThreadId = response.data.thread_id;
+        const suggestedQuestions = response.data.suggested_questions;
 
         // Save thread_id to localStorage
         if (responseThreadId) {
@@ -72,6 +79,10 @@ function Chatbot() {
           ...prevMessages,
           { text: botResponse, user: "bot" },
         ]);
+
+        if (suggestedQuestions) {
+          setSuggestedQuestions(suggestedQuestions);
+        }
       } catch (error) {
         console.error(error);
         setMessages((prevMessages) => [
@@ -83,13 +94,14 @@ function Chatbot() {
       }
     };
 
-    if (input.trim()) {
+    if ((question || input).trim()) {
       setMessages((prevMessages) => [
         ...prevMessages,
-        { text: input, user: "me" },
+        { text: question || input, user: "me" },
       ]);
       setInput(""); // Reset input field after sending a message
       setIsLoading(true);
+      setSuggestedQuestions([]); // Clear suggested questions while loading
       getChatbotResponse(); // Call the function to get the response from the bot
     }
   };
@@ -125,6 +137,20 @@ function Chatbot() {
               )}
               <div ref={messagesEndRef} />
             </div>
+            {suggestedQuestions.length > 0 && (
+              <div className={styles.suggestedQuestions}>
+                {suggestedQuestions.map((question, index) => (
+                  <button
+                    key={index}
+                    className={styles.suggestedQuestionBtn}
+                    onClick={() => sendMessage(question)}
+                    disabled={isLoading} // Disable buttons when loading
+                  >
+                    {question}
+                  </button>
+                ))}
+              </div>
+            )}
             <div className={styles.chatInputContainer}>
               <input
                 type="text"
@@ -137,7 +163,7 @@ function Chatbot() {
               />
               <button
                 className={styles.sendButton}
-                onClick={sendMessage}
+                onClick={() => sendMessage()}
                 disabled={isLoading} // Disable button when loading
               >
                 Send
