@@ -68,7 +68,7 @@ function Chatbot() {
 
         const botResponse = response.data.response;
         const responseThreadId = response.data.thread_id;
-        const suggestedQuestions = response.data.suggested_questions;
+        const newSuggestedQuestions = response.data.suggested_questions;
 
         // Save thread_id to localStorage
         if (responseThreadId) {
@@ -80,8 +80,8 @@ function Chatbot() {
           { text: botResponse, user: "bot" },
         ]);
 
-        if (suggestedQuestions) {
-          setSuggestedQuestions(suggestedQuestions);
+        if (newSuggestedQuestions) {
+          setSuggestedQuestions(newSuggestedQuestions);
         }
       } catch (error) {
         console.error(error);
