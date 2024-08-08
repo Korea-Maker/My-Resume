@@ -8,9 +8,9 @@ function Chatbot() {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [suggestedQuestions, setSuggestedQuestions] = useState([
-    "추천 질문 1",
-    "추천 질문 2",
-    "추천 질문 3"
+    "당신에 대해 말해주세요.",
+    "당신의 이력을 알려주세요.",
+    "당신의 성격의 장단점을 알려주세요."
   ]);
 
   const messagesEndRef = useRef(null);
@@ -82,6 +82,9 @@ function Chatbot() {
 
         if (newSuggestedQuestions) {
           setSuggestedQuestions(newSuggestedQuestions);
+        }
+        else {
+          setSuggestedQuestions(["당신에 대해 말해주세요.", "당신의 이력을 알려주세요.", "당신의 성격의 장단점을 알려주세요."]);
         }
       } catch (error) {
         console.error(error);
