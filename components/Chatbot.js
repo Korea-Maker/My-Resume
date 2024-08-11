@@ -102,10 +102,10 @@ function Chatbot() {
         ...prevMessages,
         { text: question || input, user: "me" },
       ]);
-      setInput(""); // Reset input field after sending a message
+      setInput("");
       setIsLoading(true);
-      setSuggestedQuestions([]); // Clear suggested questions while loading
-      getChatbotResponse(); // Call the function to get the response from the bot
+      setSuggestedQuestions([]);
+      getChatbotResponse();
     }
   };
 
@@ -147,7 +147,7 @@ function Chatbot() {
                     key={index}
                     className={styles.suggestedQuestionBtn}
                     onClick={() => sendMessage(question)}
-                    disabled={isLoading} // Disable buttons when loading
+                    disabled={isLoading}
                   >
                     {question}
                   </button>
@@ -162,12 +162,12 @@ function Chatbot() {
                 placeholder="Type a message..."
                 onChange={(e) => setInput(e.target.value)}
                 onKeyUp={(e) => e.key === "Enter" && !isLoading && sendMessage()}
-                disabled={isLoading} // Disable input when loading
+                disabled={isLoading}
               />
               <button
                 className={styles.sendButton}
                 onClick={() => sendMessage()}
-                disabled={isLoading} // Disable button when loading
+                disabled={isLoading}
               >
                 Send
               </button>
