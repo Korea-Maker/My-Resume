@@ -47,11 +47,8 @@ function Nav() {
             <Link href="#skills">
               <li className={`${styles.navElement} ${show && styles.navElementWhite}`} onClick={handleNavElementClick}>Skills</li>
             </Link>
-            <Link href="#">
-              <li className={`${styles.navElement} ${show && styles.navElementWhite}`} onClick={handleNavElementClick}>Projects</li>
-            </Link>
-            <Link href="#">
-              <li className={`${styles.navElement} ${show && styles.navElementWhite}`} onClick={handleNavElementClick}>Career</li>
+            <Link href="#blogs">
+              <li className={`${styles.navElement} ${show && styles.navElementWhite}`} onClick={handleNavElementClick}>Blogs</li>
             </Link>
           </ul>
           <button className={styles.barbutton} onClick={handleMenu}>

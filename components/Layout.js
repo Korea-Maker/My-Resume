@@ -6,8 +6,7 @@ import Banner from './Banner';
 import Contents from './Contents';
 import About from './About';
 import Skills from './Skills';
-import Carrer from './Carrer';
-import Projects from './Projects';
+import Blogs from './Blogs';
 
 function Layout({ children }) {
   return (
@@ -17,8 +16,7 @@ function Layout({ children }) {
         <Banner />
         <About />
         <Skills />
-        <Projects />
-        <Carrer />
+        <Blogs />
       </Contents>
       <main>{children}</main>
       <Chatbot />
