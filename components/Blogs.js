@@ -8,6 +8,8 @@ function Blogs() {
   const [currentPage, setCurrentPage] = useState(1);
   const blogsPerPage = 9; // Number of blogs per page
 
+  const defaultImage = "https://t3.ftcdn.net/jpg/04/84/88/76/360_F_484887682_Mx57wpHG4lKrPAG0y7Q8Q7bJ952J3TTO.jpg";
+
   const fetchBlogs = async (category) => {
     try {
       const requestData = {
@@ -15,7 +17,6 @@ function Blogs() {
       };
       const response = await axios.post(
         "https://api.jongwook.xyz/blogs",
-        // "http://localhost:5000/blogs",
         requestData,
         {
           headers: {
@@ -24,8 +25,16 @@ function Blogs() {
         }
       );
 
-      const allBlogs = response.data;
-      setBlogs(allBlogs);
+      // Sort the blogs by "num" in descending order
+      const sortedBlogs = response.data.sort((a, b) => b.num - a.num);
+
+      // Replace "No Image" with the default image URL
+      const updatedBlogs = sortedBlogs.map(blog => ({
+        ...blog,
+        image: blog.image === "No Image" ? defaultImage : blog.image
+      }));
+
+      setBlogs(updatedBlogs);
       setCurrentPage(1); // Reset to first page on category change
     } catch (error) {
       console.error(error);
@@ -57,35 +66,23 @@ function Blogs() {
         <div className={styles.titleBox}>
           <div className={styles.title}>BLOGS</div>
         </div>
-        <div className={styles.blogsContainer}>
-          <div className={styles.blogCategorys}>
-            <div className={styles.blogCategory}>
-              <button
-                className={styles.categoryBtn}
-                onClick={() => setCategory("ALL")}
-              >
-                ALL
-              </button>
-            </div>
-            {/* Add other categories similarly */}
-            <div className={styles.blogCategory}>
-              <button
-                className={styles.categoryBtn}
-                onClick={() => setCategory("Programming")}
-              >
-                Programming
-              </button>
-            </div>
-          </div>
+        <div className={styles.blogCategorys}>
+          <button className={styles.categoryBtn} onClick={() => setCategory("ALL")}>ALL</button>
+          <button className={styles.categoryBtn} onClick={() => setCategory("보안 관제 관련")}>보안 관제 관련</button>
+          <button className={styles.categoryBtn} onClick={() => setCategory("CERT")}>CERT</button>
+          <button className={styles.categoryBtn} onClick={() => setCategory("Cloud")}>Cloud</button>
+          <button className={styles.categoryBtn} onClick={() => setCategory("Programming")}>Programming</button>
+          <button className={styles.categoryBtn} onClick={() => setCategory("Project")}>Project</button>
+        </div>
 
-          {/* Render blogs dynamically */}
+        <div className={styles.blogsContainer}>
           {currentBlogs.map((blog) => (
             <div key={blog._id} className={styles.blog}>
               <img src={blog.image} alt={blog.title} className={styles.blogImage} />
               <div className={styles.blogTitle}>{blog.title}</div>
               <div className={styles.blogDescription}>{blog.description}</div>
               <a href={blog.link} target="_blank" rel="noopener noreferrer">
-                Read More
+                자세히 보기
               </a>
             </div>
           ))}
@@ -98,7 +95,7 @@ function Blogs() {
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
           >
-            Previous
+            이전 페이지
           </button>
           <span>Page {currentPage} of {totalPages}</span>
           <button
@@ -106,7 +103,7 @@ function Blogs() {
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
           >
-            Next
+            다음 페이지
           </button>
         </div>
       </div>
