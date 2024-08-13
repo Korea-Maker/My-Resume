@@ -101,8 +101,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+    line-clamp: 3;
 }
 
 .blog a {
@@ -152,7 +152,7 @@
 }
 
 /* Mobile responsiveness */
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
     .blogsContainer {
         flex-direction: column;
         align-items: center;
@@ -164,7 +164,7 @@
     }
 }
 
-@media screen and (max-width: 480px) {
+@media (max-width: 480px) {
     .categoryBtn {
         font-size: 1rem;
         padding: 0.5rem 1rem;
