@@ -2,44 +2,54 @@ import React, { useEffect, useState } from "react";
 import styles from "../styles/Blogs.module.css";
 import axios from "axios";
 
-function Projects() {
+function Blogs() {
   const [category, setCategory] = useState("ALL");
+  const [blogs, setBlogs] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const blogsPerPage = 9; // Number of blogs per page
 
-  const blogs = (category) => {
-    const getBlogs = async () => {
-      try {
-        const requestData = {
-          category: category,
-        };
-        const response = await axios.post(
-          "https://api.jongwook.xyz/blogs",
-          // "http://127.0.0.1:5051/blogs",
-          requestData,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
+  const fetchBlogs = async (category) => {
+    try {
+      const requestData = {
+        category: category,
+      };
+      const response = await axios.post(
+        "https://api.jongwook.xyz/blogs",
+        // "http://localhost:5000/blogs",
+        requestData,
+        {
+          headers: {
+            "Content-Type": "application/json",
           }
-        );
+        }
+      );
 
-        console.log(response);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        console.log("Blogs are fetched");
-      }
-    };
-
-    if (category){
-      getBlogs();
+      const allBlogs = response.data;
+      setBlogs(allBlogs);
+      setCurrentPage(1); // Reset to first page on category change
+    } catch (error) {
+      console.error(error);
+    } finally {
+      console.log("Blogs are fetched");
     }
   };
 
   useEffect(() => {
-    blogs(category);
-  }
-  , [category]);
+    fetchBlogs(category);
+  }, [category]);
 
+  // Calculate total pages based on fetched data
+  const totalPages = Math.ceil(blogs.length / blogsPerPage);
+
+  // Get the blogs for the current page
+  const currentBlogs = blogs.slice(
+    (currentPage - 1) * blogsPerPage,
+    currentPage * blogsPerPage
+  );
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
 
   return (
     <div className={styles.blogs} id="blogs">
@@ -48,31 +58,60 @@ function Projects() {
           <div className={styles.title}>BLOGS</div>
         </div>
         <div className={styles.blogsContainer}>
-          <div className={styles.blog}>
-            <div className={styles.blogCategorys}>
-              <div className={styles.blogCategory}>
-                <button className={styles.categoryBtn} onClick={() => setCategory("보안 관제 관련")}>보안 관제 관련</button>
-              </div>
-              <div className={styles.blogCategory}>
-                <button className={styles.categoryBtn} onClick={() => setCategory("CERT")}>CERT</button>
-              </div>
-              <div className={styles.blogCategory}>
-                <button className={styles.categoryBtn} onClick={() => setCategory("Cloud")}>CLOUD</button>
-              </div>
-              <div className={styles.blogCategory}>
-                <button className={styles.categoryBtn} onClick={() => setCategory("Programming")}>Programming</button>
-              </div>
-              <div className={styles.blogCategory}>
-                <button className={styles.categoryBtn} onClick={() => setCategory("Project")}>Project</button>
-              </div>
+          <div className={styles.blogCategorys}>
+            <div className={styles.blogCategory}>
+              <button
+                className={styles.categoryBtn}
+                onClick={() => setCategory("ALL")}
+              >
+                ALL
+              </button>
             </div>
-            <div className={styles.blogTitle}>Blog Title</div>
-            <div className={styles.blogDescription}>Description</div>
+            {/* Add other categories similarly */}
+            <div className={styles.blogCategory}>
+              <button
+                className={styles.categoryBtn}
+                onClick={() => setCategory("Programming")}
+              >
+                Programming
+              </button>
+            </div>
           </div>
+
+          {/* Render blogs dynamically */}
+          {currentBlogs.map((blog) => (
+            <div key={blog._id} className={styles.blog}>
+              <img src={blog.image} alt={blog.title} className={styles.blogImage} />
+              <div className={styles.blogTitle}>{blog.title}</div>
+              <div className={styles.blogDescription}>{blog.description}</div>
+              <a href={blog.link} target="_blank" rel="noopener noreferrer">
+                Read More
+              </a>
+            </div>
+          ))}
+        </div>
+
+        {/* Pagination Controls */}
+        <div className={styles.pagination}>
+          <button
+            className={styles.pageBtn}
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <span>Page {currentPage} of {totalPages}</span>
+          <button
+            className={styles.pageBtn}
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>
   );
 }
 
-export default Projects;
+export default Blogs;
