@@ -28,7 +28,6 @@ function Blogs() {
       const requestData = { category };
       const response = await axios.post(
         "https://api.jongwook.xyz/blogs",
-        // "http://localhost:5050/blogs",
         requestData,
         {
           headers: { "Content-Type": "application/json" }
