@@ -17,6 +17,7 @@ const sanitizeURL = (url, defaultURL = "") => {
 
 function Blogs() {
   const [category, setCategory] = useState("ALL");
+  const [activeCategory, setActiveCategory] = useState("ALL"); // New state for tracking active category
   const [blogs, setBlogs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const blogsPerPage = 9;
@@ -62,6 +63,11 @@ function Blogs() {
     currentPage * blogsPerPage
   );
 
+  const handleCategoryClick = (newCategory) => {
+    setCategory(newCategory);
+    setActiveCategory(newCategory); // Update active category
+  };
+
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
@@ -73,12 +79,12 @@ function Blogs() {
           <div className={styles.title}>BLOGS</div>
         </div>
         <div className={styles.blogCategorys}>
-          <button className={styles.categoryBtn} onClick={() => setCategory("ALL")}>ALL</button>
-          <button className={styles.categoryBtn} onClick={() => setCategory("보안 관제 관련")}>보안 관제 관련</button>
-          <button className={styles.categoryBtn} onClick={() => setCategory("CERT")}>CERT</button>
-          <button className={styles.categoryBtn} onClick={() => setCategory("Cloud")}>Cloud</button>
-          <button className={styles.categoryBtn} onClick={() => setCategory("Programming")}>Programming</button>
-          <button className={styles.categoryBtn} onClick={() => setCategory("Project")}>Project</button>
+          <button className={`${styles.categoryBtn} ${activeCategory === "ALL" ? styles.active : ""}`} onClick={() => handleCategoryClick("ALL")}>ALL</button>
+          <button className={`${styles.categoryBtn} ${activeCategory === "보안 관제 관련" ? styles.active : ""}`} onClick={() => handleCategoryClick("보안 관제 관련")}>보안 관제 관련</button>
+          <button className={`${styles.categoryBtn} ${activeCategory === "CERT" ? styles.active : ""}`} onClick={() => handleCategoryClick("CERT")}>CERT</button>
+          <button className={`${styles.categoryBtn} ${activeCategory === "Cloud" ? styles.active : ""}`} onClick={() => handleCategoryClick("Cloud")}>Cloud</button>
+          <button className={`${styles.categoryBtn} ${activeCategory === "Programming" ? styles.active : ""}`} onClick={() => handleCategoryClick("Programming")}>Programming</button>
+          <button className={`${styles.categoryBtn} ${activeCategory === "Project" ? styles.active : ""}`} onClick={() => handleCategoryClick("Project")}>Project</button>
         </div>
 
         <div className={styles.blogsContainer}>

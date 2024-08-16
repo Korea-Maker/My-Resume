@@ -57,6 +57,14 @@
     color: #1d809f;
 }
 
+.categoryBtn.active {
+    background-color: #fff;
+    color: #1d809f;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7); /* Add a glow effect */
+    border: 2px solid #fff; /* Make the border slightly thicker */
+    transform: scale(1.05); /* Slightly increase the size */
+}
+
 .blogsContainer {
     display: flex;
     flex-wrap: wrap;
@@ -74,7 +82,8 @@
     display: flex;
     flex-direction: column;
     transition: transform 0.3s ease;
-    max-height: 400px;
+    max-height: 420px; /* Adjusted to fit more content */
+    height: 420px; /* Adjusted fixed height */
 }
 
 .blog:hover {
@@ -92,17 +101,24 @@
     font-weight: 700;
     padding: 1rem;
     border-bottom: 1px solid #e0e0e0;
+    overflow: hidden; /* Overflow text will be hidden */
+    text-overflow: ellipsis; /* Adds ... at the end if text overflows */
+    -webkit-box-orient: vertical; /* Vertical alignment */
+    -webkit-line-clamp: 2; /* Show up to 2 lines */
+    line-clamp: 2; /* Standard property if supported */
 }
 
 .blogDescription {
     padding: 1rem;
     font-size: 1rem;
     flex-grow: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    line-clamp: 3;
+    overflow: hidden; /* Overflow text will be hidden */
+    text-overflow: ellipsis; /* Adds ... at the end if text overflows */
+    display: -webkit-box; /* Flexbox container for truncation */
+    -webkit-box-orient: vertical; /* Vertical alignment */
+    -webkit-line-clamp: 3; /* Show up to 3 lines */
+    line-clamp: 3; /* Standard property if supported */
+    margin-bottom: auto; /* Ensures that the description takes up space, pushing the "자세히 보기" link down */
 }
 
 .blog a {
