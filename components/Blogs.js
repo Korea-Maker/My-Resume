@@ -6,7 +6,7 @@ import DOMPurify from 'dompurify';
 // Function to sanitize URLs
 const sanitizeURL = (url, defaultURL = "") => {
   const pattern = /^(https?|data):/;
-  return pattern.test(url) ? url : defaultURL;
+  return pattern.test(url) ? DOMPurify.sanitize(url) : defaultURL;
 };
 
 // Function to sanitize text content
