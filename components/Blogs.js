@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import styles from "../styles/Blogs.module.css";
 import axios from "axios";
+import DOMPurify from 'dompurify';
 
 // Function to sanitize URLs
 const sanitizeURL = (url, defaultURL = "") => {
   const pattern = /^(https?|data):/;
   return pattern.test(url) ? url : defaultURL;
+};
+
+// Function to sanitize text content
+const sanitizeText = (text) => {
+  return DOMPurify.sanitize(text);
 };
 
 function Blogs() {
@@ -22,7 +28,8 @@ function Blogs() {
         category: category,
       };
       const response = await axios.post(
-        "https://api.jongwook.xyz/blogs",
+        // "https://api.jongwook.xyz/blogs",
+        "http://localhost:5050/blogs",
         requestData,
         {
           headers: {
@@ -34,11 +41,13 @@ function Blogs() {
       // Sort the blogs by "num" in descending order
       const sortedBlogs = response.data.sort((a, b) => b.num - a.num);
 
-      // Replace "No Image" with the default image URL and sanitize URLs
+      // Replace "No Image" with the default image URL, sanitize URLs and text
       const updatedBlogs = sortedBlogs.map(blog => ({
         ...blog,
         image: sanitizeURL(blog.image, defaultImage),
-        link: sanitizeURL(blog.link, "#")
+        link: sanitizeURL(blog.link, "#"),
+        title: sanitizeText(blog.title),
+        description: sanitizeText(blog.description)
       }));
 
       setBlogs(updatedBlogs);
