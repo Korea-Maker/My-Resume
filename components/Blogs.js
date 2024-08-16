@@ -28,8 +28,7 @@ function Blogs() {
         category: category,
       };
       const response = await axios.post(
-        // "https://api.jongwook.xyz/blogs",
-        "http://localhost:5050/blogs",
+        "https://api.jongwook.xyz/blogs",
         requestData,
         {
           headers: {
