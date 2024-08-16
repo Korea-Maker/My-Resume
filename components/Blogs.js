@@ -3,54 +3,49 @@ import styles from "../styles/Blogs.module.css";
 import axios from "axios";
 import DOMPurify from 'dompurify';
 
-// Function to sanitize URLs
 const sanitizeURL = (url, defaultURL = "") => {
-  const pattern = /^(https?|data):/;
-  return pattern.test(url) ? DOMPurify.sanitize(url) : defaultURL;
-};
-
-// Function to sanitize text content
-const sanitizeText = (text) => {
-  return DOMPurify.sanitize(text);
+  try {
+    const safeURL = new URL(DOMPurify.sanitize(url));
+    if (['http:', 'https:', 'data:'].includes(safeURL.protocol)) {
+      return safeURL.toString();
+    }
+  } catch (e) {
+    console.warn('Invalid URL:', url);
+  }
+  return defaultURL;
 };
 
 function Blogs() {
   const [category, setCategory] = useState("ALL");
   const [blogs, setBlogs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const blogsPerPage = 9; // Number of blogs per page
+  const blogsPerPage = 9;
 
   const defaultImage = "https://t3.ftcdn.net/jpg/04/84/88/76/360_F_484887682_Mx57wpHG4lKrPAG0y7Q8Q7bJ952J3TTO.jpg";
 
   const fetchBlogs = async (category) => {
     try {
-      const requestData = {
-        category: category,
-      };
+      const requestData = { category };
       const response = await axios.post(
         "https://api.jongwook.xyz/blogs",
+        // "http://localhost:5050/blogs",
         requestData,
         {
-          headers: {
-            "Content-Type": "application/json",
-          }
+          headers: { "Content-Type": "application/json" }
         }
       );
 
-      // Sort the blogs by "num" in descending order
       const sortedBlogs = response.data.sort((a, b) => b.num - a.num);
-
-      // Replace "No Image" with the default image URL, sanitize URLs and text
       const updatedBlogs = sortedBlogs.map(blog => ({
         ...blog,
         image: sanitizeURL(blog.image, defaultImage),
         link: sanitizeURL(blog.link, "#"),
-        title: sanitizeText(blog.title),
-        description: sanitizeText(blog.description)
+        title: DOMPurify.sanitize(blog.title),
+        description: DOMPurify.sanitize(blog.description)
       }));
 
       setBlogs(updatedBlogs);
-      setCurrentPage(1); // Reset to first page on category change
+      setCurrentPage(1);
     } catch (error) {
       console.error(error);
     } finally {
@@ -62,10 +57,7 @@ function Blogs() {
     fetchBlogs(category);
   }, [category]);
 
-  // Calculate total pages based on fetched data
   const totalPages = Math.ceil(blogs.length / blogsPerPage);
-
-  // Get the blogs for the current page
   const currentBlogs = blogs.slice(
     (currentPage - 1) * blogsPerPage,
     currentPage * blogsPerPage
@@ -103,7 +95,6 @@ function Blogs() {
           ))}
         </div>
 
-        {/* Pagination Controls */}
         <div className={styles.pagination}>
           <button
             className={styles.pageBtn}
