@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import styles from "../styles/Blogs.module.css";
 import axios from "axios";
 
+// Function to sanitize URLs
+const sanitizeURL = (url, defaultURL = "") => {
+  const pattern = /^(https?|data):/;
+  return pattern.test(url) ? url : defaultURL;
+};
+
 function Blogs() {
   const [category, setCategory] = useState("ALL");
   const [blogs, setBlogs] = useState([]);
@@ -28,10 +34,11 @@ function Blogs() {
       // Sort the blogs by "num" in descending order
       const sortedBlogs = response.data.sort((a, b) => b.num - a.num);
 
-      // Replace "No Image" with the default image URL
+      // Replace "No Image" with the default image URL and sanitize URLs
       const updatedBlogs = sortedBlogs.map(blog => ({
         ...blog,
-        image: blog.image === "No Image" ? defaultImage : blog.image
+        image: sanitizeURL(blog.image, defaultImage),
+        link: sanitizeURL(blog.link, "#")
       }));
 
       setBlogs(updatedBlogs);
