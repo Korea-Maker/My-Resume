@@ -14,7 +14,7 @@ function Footer() {
             <FontAwesomeIcon icon={faT} className={styles.fontawesome} />
           </li>
         </Link>
-        <Link href="#">
+        <Link href="https://www.linkedin.com/in/jong-wook-lee-9b0a44250/">
           <li className={styles.footerElement}>
             <FontAwesomeIcon icon={faLinkedin} className={styles.fontawesome} />
           </li>
