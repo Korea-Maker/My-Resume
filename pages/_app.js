@@ -1,6 +1,10 @@
 import "@/styles/globals.css";
 import Layout from '../components/Layout';
 import Head from 'next/head';
+import '@fortawesome/fontawesome-svg-core/styles.css'; // Import FontAwesome CSS
+import { config } from '@fortawesome/fontawesome-svg-core';
+config.autoAddCss = false; // Prevent FontAwesome from auto-adding its CSS
+
 
 export default function App({ Component, pageProps }) {
   return (
