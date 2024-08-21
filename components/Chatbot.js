@@ -66,9 +66,12 @@ function Chatbot() {
           }
         );
 
-        const botResponse = response.data.response;
+        let botResponse = response.data.response;
         const responseThreadId = response.data.thread_id;
         const newSuggestedQuestions = response.data.suggested_questions;
+
+        // Replace \n with <br> for proper HTML rendering
+        botResponse = botResponse.replace(/\n/g, "<br>");
 
         // Save thread_id to localStorage
         if (responseThreadId) {
@@ -82,8 +85,7 @@ function Chatbot() {
 
         if (newSuggestedQuestions) {
           setSuggestedQuestions(newSuggestedQuestions);
-        }
-        else {
+        } else {
           setSuggestedQuestions(["이종욱에 대해 말해주세요.", "이종욱의 이력을 알려주세요.", "이종욱의 성격의 장단점을 알려주세요."]);
         }
       } catch (error) {
@@ -129,9 +131,8 @@ function Chatbot() {
                 <div
                   key={index}
                   className={`${styles.message} ${message.user === "me" ? styles.me : styles.bot}`}
-                >
-                  <p>{message.text}</p>
-                </div>
+                  dangerouslySetInnerHTML={{ __html: message.text }}
+                />
               ))}
               {isLoading && (
                 <div className={styles.loading}>
