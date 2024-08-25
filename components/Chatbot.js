@@ -21,7 +21,7 @@ function Chatbot() {
   };
 
   const handleClickOutside = (event) => {
-    if (chatbotContainerRef.current && !chatbotContainerRef.current.contains(event.target)) {
+    if (chatbotContainerRef.current && chatbotContainerRef.current.contains && !chatbotContainerRef.current?.contains(event.target)) {
       setIsChatbotVisible(false);
     }
   };
