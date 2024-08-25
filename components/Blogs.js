@@ -17,7 +17,7 @@ const sanitizeURL = (url, defaultURL = "") => {
 
 function Blogs() {
   const [category, setCategory] = useState("ALL");
-  const [activeCategory, setActiveCategory] = useState("ALL"); // New state for tracking active category
+  const [activeCategory, setActiveCategory] = useState("ALL");
   const [blogs, setBlogs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const blogsPerPage = 9;
@@ -65,7 +65,7 @@ function Blogs() {
 
   const handleCategoryClick = (newCategory) => {
     setCategory(newCategory);
-    setActiveCategory(newCategory); // Update active category
+    setActiveCategory(newCategory);
   };
 
   const handlePageChange = (newPage) => {
