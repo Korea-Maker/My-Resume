@@ -54,7 +54,9 @@ const renderHeadMetaTags = () => (
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
-  const isAdminPage = router.pathname.startsWith('/admin');
+  
+  // Check for paths starting with '/admin' or '/management'
+  const isAdminOrManagementPage = router.pathname.startsWith('/admin') || router.pathname.startsWith('/management');
 
   return (
     <>
@@ -74,7 +76,7 @@ export default function App({ Component, pageProps }) {
         `}
       </Script>
 
-      {!isAdminPage ? (
+      {!isAdminOrManagementPage ? (
         <Layout>
           <Component {...pageProps} />
         </Layout>

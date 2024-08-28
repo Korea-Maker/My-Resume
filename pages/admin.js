@@ -1,29 +1,40 @@
 import React, { useState } from 'react';  
-import styles from '../styles/Admin.module.css'; // CSS 모듈을 임포트
+import { useRouter } from 'next/router';
+import styles from '../styles/Admin.module.css'; // Import CSS module
 import axios from 'axios';
 
 function Admin() {  
   const [id, setId] = useState('');  
   const [password, setPassword] = useState('');  
+  const router = useRouter();  // Hook to programmatically navigate
 
   const handleSubmit = async (e) => {  
     e.preventDefault();  
     
-    // Debugging
-    console.log('ID:', id);  
-    console.log('Password:', password);
     const requestData = {
       "id": id,
       "pw": password
     };
 
     try {
-      response = await axios.post('https://api.jongwook.xyz/auth', requestData);
-      console.log(response.data); // Debugging
-      }catch(error){
-        console.log(error);
+      // Make a login request with credentials included
+      const response = await axios.post('https://api.jongwook.xyz/auth/login', requestData, { withCredentials: true });
+      
+      console.log(response.data); // Debugging output
+
+      if (response.data.status === 'success') {
+        alert("Login successful!");
+        // Redirect to the management page using consistent domain
+        window.location.href = 'https://resume.jongwook.xyz/management';
+      } else {
+        alert("Login failed!");
       }
-    };  
+
+    } catch(error) {
+      console.error('Error during login:', error);
+      alert("Login failed!");
+    }
+  };  
 
   return (  
     <div className={styles.container}>  
