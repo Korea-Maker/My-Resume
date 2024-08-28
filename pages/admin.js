@@ -1,16 +1,29 @@
 import React, { useState } from 'react';  
-import styles from '../styles/Admin.module.css'; // CSS 모듈을 임포트  
+import styles from '../styles/Admin.module.css'; // CSS 모듈을 임포트
+import axios from 'axios';
 
 function Admin() {  
   const [id, setId] = useState('');  
   const [password, setPassword] = useState('');  
 
-  const handleSubmit = (e) => {  
+  const handleSubmit = async (e) => {  
     e.preventDefault();  
-    // 로그인 로직을 여기에 추가하세요  
+    
+    // Debugging
     console.log('ID:', id);  
-    console.log('Password:', password);  
-  };  
+    console.log('Password:', password);
+    const requestData = {
+      "id": id,
+      "pw": password
+    };
+
+    try {
+      response = await axios.post('https://api.jongwook.xyz/auth', requestData);
+      console.log(response.data); // Debugging
+      }catch(error){
+        console.log(error);
+      }
+    };  
 
   return (  
     <div className={styles.container}>  
