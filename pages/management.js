@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import Styles from '../styles/Management.module.css';
 
 function Management() {
   const [authorized, setAuthorized] = useState(false);
