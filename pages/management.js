@@ -13,7 +13,7 @@ function Management() {
         const response = await axios.get('https://api.jongwook.xyz/auth/protected', { withCredentials: true });
         console.log('Authorization response:', response.data); // Debugging output
 
-        if (response.data.status === 'success') {
+        if (response.data.status === "성공") {
           setAuthorized(true);  // User is authorized
         } else {
           console.warn('Unauthorized access - redirecting to login');

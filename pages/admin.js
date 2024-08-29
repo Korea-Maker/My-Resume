@@ -22,8 +22,7 @@ function Admin() {
       
       console.log(response.data); // Debugging output
 
-      if (response.data.status === 'success') {
-        alert("Login successful!");
+      if (response.data.status === "성공") {
         // Redirect to the management page using consistent domain
         window.location.href = 'https://resume.jongwook.xyz/management';
       } else {
