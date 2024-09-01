@@ -1,12 +1,12 @@
 import React, { useState } from 'react';  
 import { useRouter } from 'next/router';
-import styles from '../styles/Admin.module.css'; // Import CSS module
+import styles from '../styles/Admin.module.css';
 import axios from 'axios';
 
 function Admin() {  
   const [id, setId] = useState('');  
   const [password, setPassword] = useState('');  
-  const router = useRouter();  // Hook to programmatically navigate
+  const router = useRouter();
 
   const handleSubmit = async (e) => {  
     e.preventDefault();  
@@ -17,13 +17,11 @@ function Admin() {
     };
 
     try {
-      // Make a login request with credentials included
       const response = await axios.post('https://api.jongwook.xyz/auth/login', requestData, { withCredentials: true });
       
-      console.log(response.data); // Debugging output
+      console.log(response.data);
 
       if (response.data.status === "성공") {
-        // Redirect to the management page using consistent domain
         window.location.href = 'https://resume.jongwook.xyz/management';
       } else {
         alert("Login failed!");

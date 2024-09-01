@@ -1,28 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import Styles from '../styles/Management.module.css';
 
 function Management() {
   const [authorized, setAuthorized] = useState(false);
-  const router = useRouter();  // Hook to programmatically navigate
+  const router = useRouter();
 
   useEffect(() => {
     const checkAuthorization = async () => {
       try {
-        // Make a request to the protected route with credentials included
         const response = await axios.get('https://api.jongwook.xyz/auth/protected', { withCredentials: true });
-        console.log('Authorization response:', response.data); // Debugging output
+        console.log('Authorization response:', response.data);
 
         if (response.data.status === "성공") {
-          setAuthorized(true);  // User is authorized
+          setAuthorized(true);
         } else {
           console.warn('Unauthorized access - redirecting to login');
-          router.push('/admin');  // Redirect to login page
+          router.push('/admin');
         }
       } catch (error) {
         console.error('Error checking authorization:', error.response ? error.response.data : error);
-        router.push('/admin');  // Redirect to login page
+        router.push('/admin');
       }
     };
 
