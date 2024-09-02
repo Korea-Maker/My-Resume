@@ -1,56 +1,63 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import useAuthStore from '../stores/authStore';  // Import Zustand store
-import cookies from 'js-cookie'; // Import cookie handling library
+import useAuthStore from '../stores/authStore';
+import cookies from 'js-cookie';
 
 function Management() {
   const router = useRouter();
-  const { setAuthorized, clearToken } = useAuthStore((state) => ({
+  const { setAuthorized, clearToken, token } = useAuthStore((state) => ({
     setAuthorized: state.setAuthorized,
     clearToken: state.clearToken,
+    token: state.token,
   }));
 
   useEffect(() => {
     const checkAuthorization = async () => {
-      // Retrieve token from cookies
-      const token = cookies.get('token');  // Use cookies to get the JWT token
-
-      if (!token) {
-        console.warn('No token found - redirecting to login');
-        router.push('/admin');
-        return;
-      }
-
       try {
         const response = await axios.get('https://api.jongwook.xyz/auth/protected', {
-          headers: { Authorization: `Bearer ${token}` }, // Use token from cookies
+          headers: { Authorization: `Bearer ${token}` },
           withCredentials: true,
         });
 
-        console.log('Authorization response:', response.data);
+        if (response.data.status === "성공") {
+          setAuthorized(true);
+        } else {
+          await refreshAccessToken();  // Attempt to refresh the token
+        }
+      } catch (error) {
+        console.error('Error checking authorization:', error);
+        await refreshAccessToken();
+      }
+    };
+
+    const refreshAccessToken = async () => {
+      try {
+        const response = await axios.post('https://api.jongwook.xyz/auth/refresh', {}, { withCredentials: true });
 
         if (response.data.status === "성공") {
-          setAuthorized(true); // Update Zustand's authorized state
+          useAuthStore.setState({ token: response.data.access_token, authorized: true });
         } else {
-          console.warn('Unauthorized access - clearing token and redirecting to login');
-          clearToken(); // Clear token from Zustand
+          clearToken();
           router.push('/admin');
         }
       } catch (error) {
-        console.error('Error checking authorization:', error.response ? error.response.data : error);
-        clearToken(); // Clear token on error
+        console.error('Error refreshing token:', error);
+        clearToken();
         router.push('/admin');
       }
     };
 
-    checkAuthorization();
-  }, []); // Empty dependency array ensures this runs once on mount
+    if (!token) {
+      refreshAccessToken();  // Immediately try to refresh if no token in memory
+    } else {
+      checkAuthorization();
+    }
+  }, [token]);  // Re-run when token changes
 
   const handleLogout = () => {
-    clearToken();  // Clear JWT token from Zustand
-    cookies.remove('token'); // Remove the token from cookies
-    router.push('/admin');  // Redirect to the login page
+    clearToken();
+    router.push('/admin');
   };
 
   if (!useAuthStore.getState().authorized) {
@@ -61,7 +68,7 @@ function Management() {
     <div>
       <h1>Management Page</h1>
       <p>This page is only accessible to authenticated users.</p>
-      <button onClick={handleLogout}>Logout</button> {/* Logout button */}
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 }

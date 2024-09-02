@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../styles/Admin.module.css';
 import axios from 'axios';
-import useAuthStore from '../stores/authStore';  // Import Zustand store using the create hook
+import useAuthStore from '../stores/authStore';
 
 function Admin() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  const setToken = useAuthStore((state) => state.setToken);  // Access Zustand's setToken function
+  const setToken = useAuthStore((state) => state.setToken);
   const router = useRouter();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();  // Prevent default form submission
+    e.preventDefault();
 
     const requestData = {
       id: id,
@@ -19,14 +19,11 @@ function Admin() {
     };
 
     try {
-      // Make a POST request to the login endpoint
       const response = await axios.post('https://api.jongwook.xyz/auth/login', requestData, { withCredentials: true });
 
-      console.log(response.data);
-
       if (response.data.status === "성공") {
-        setToken(response.data.token);  // Store JWT token in Zustand
-        router.push('/management');  // Redirect to management page
+        setToken(response.data.access_token);  // Store JWT token in Zustand
+        router.push('/management');
       } else {
         alert("Login failed!");
       }
