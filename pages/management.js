@@ -2,18 +2,20 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import useAuthStore from '../stores/authStore';  // Import Zustand store
+import cookies from 'js-cookie'; // Import cookie handling library
 
 function Management() {
   const router = useRouter();
-  const { token, authorized, setAuthorized, clearToken } = useAuthStore((state) => ({
-    token: state.token,
-    authorized: state.authorized,
+  const { setAuthorized, clearToken } = useAuthStore((state) => ({
     setAuthorized: state.setAuthorized,
     clearToken: state.clearToken,
   }));
 
   useEffect(() => {
     const checkAuthorization = async () => {
+      // Retrieve token from cookies
+      const token = cookies.get('token');  // Use cookies to get the JWT token
+
       if (!token) {
         console.warn('No token found - redirecting to login');
         router.push('/admin');
@@ -22,7 +24,7 @@ function Management() {
 
       try {
         const response = await axios.get('https://api.jongwook.xyz/auth/protected', {
-          headers: { Authorization: `Bearer ${token}` }, // Use token from Zustand
+          headers: { Authorization: `Bearer ${token}` }, // Use token from cookies
           withCredentials: true,
         });
 
@@ -43,14 +45,15 @@ function Management() {
     };
 
     checkAuthorization();
-  }, [token, router, setAuthorized, clearToken]); // Dependencies to re-run if token changes
+  }, []); // Empty dependency array ensures this runs once on mount
 
   const handleLogout = () => {
     clearToken();  // Clear JWT token from Zustand
+    cookies.remove('token'); // Remove the token from cookies
     router.push('/admin');  // Redirect to the login page
   };
 
-  if (!authorized) {
+  if (!useAuthStore.getState().authorized) {
     return <div>Loading...</div>;
   }
 
