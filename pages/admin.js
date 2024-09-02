@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../styles/Admin.module.css';
 import axios from 'axios';
-import useAuthStore from '../stores/authStore';  // Import Zustand store
+import useAuthStore from '../stores/authStore';  // Import Zustand store using the create hook
 
 function Admin() {
   const [id, setId] = useState('');
