@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import useAuthStore from '../stores/authStore';
-import cookies from 'js-cookie';
 
 function Management() {
   const router = useRouter();
+  const [loading, setLoading] = useState(true);  // State to handle loading status
   const { setAuthorized, clearToken, token } = useAuthStore((state) => ({
     setAuthorized: state.setAuthorized,
     clearToken: state.clearToken,
@@ -13,21 +13,32 @@ function Management() {
   }));
 
   useEffect(() => {
+    const initializeAuth = async () => {
+      if (!token) {
+        // No token available, attempt to refresh
+        await refreshAccessToken();
+      } else {
+        // Validate the existing token
+        await checkAuthorization();
+      }
+      setLoading(false);  // Set loading to false after initialization
+    };
+
     const checkAuthorization = async () => {
       try {
-        const response = await axios.get('https://api.jongwook.xyz/auth/protected', {
+        const response = await axios.get('https://api.jongwook.xyz/auth/update', {  // Changed to actual secure endpoint
           headers: { Authorization: `Bearer ${token}` },
           withCredentials: true,
         });
 
         if (response.data.status === "성공") {
-          setAuthorized(true);
+          setAuthorized(true);  // User is authorized
         } else {
-          await refreshAccessToken();  // Attempt to refresh the token
+          await refreshAccessToken();  // Attempt to refresh the token if not authorized
         }
       } catch (error) {
         console.error('Error checking authorization:', error);
-        await refreshAccessToken();
+        await refreshAccessToken();  // Refresh token on error
       }
     };
 
@@ -36,10 +47,11 @@ function Management() {
         const response = await axios.post('https://api.jongwook.xyz/auth/refresh', {}, { withCredentials: true });
 
         if (response.data.status === "성공") {
-          useAuthStore.setState({ token: response.data.access_token, authorized: true });
+          useAuthStore.getState().setToken(response.data.access_token);  // Update token in store
+          setAuthorized(true);  // Set authorized to true
         } else {
-          clearToken();
-          router.push('/admin');
+          clearToken();  // Clear token on failure
+          router.push('/admin');  // Redirect to login
         }
       } catch (error) {
         console.error('Error refreshing token:', error);
@@ -48,20 +60,21 @@ function Management() {
       }
     };
 
-    if (!token) {
-      refreshAccessToken();  // Immediately try to refresh if no token in memory
-    } else {
-      checkAuthorization();
-    }
-  }, [token]);  // Re-run when token changes
+    initializeAuth();  // Initialize authentication check
+
+  }, [token, setAuthorized, clearToken, router]);
 
   const handleLogout = () => {
     clearToken();
     router.push('/admin');
   };
 
+  if (loading) {
+    return <div>Loading...</div>;  // Display loading state while checking authentication
+  }
+
   if (!useAuthStore.getState().authorized) {
-    return <div>Loading...</div>;
+    return <div>Unauthorized access. Redirecting...</div>;
   }
 
   return (
