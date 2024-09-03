@@ -26,7 +26,8 @@ function Management() {
       try {
         const response = await axios.get('https://api.jongwook.xyz/auth/authenticate', {  
           headers: { 
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
+            origin: 'https://api.jongwook.xyz',
           },
           withCredentials: true,
         });
