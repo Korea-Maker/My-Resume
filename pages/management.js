@@ -44,7 +44,7 @@ function Management() {
 
     const refreshAccessToken = async () => {
       try {
-        const response = await axios.post('https://api.jongwook.xyz/auth/refresh', { withCredentials: true });
+        const response = await axios.post('https://api.jongwook.xyz/auth/refresh', {}, { withCredentials: true });
 
         if (response.data.status === "성공") {
           useAuthStore.getState().setToken(response.data.access_token);  // Update token in store
