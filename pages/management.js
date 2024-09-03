@@ -27,7 +27,10 @@ function Management() {
     const checkAuthorization = async () => {
       try {
         const response = await axios.get('https://api.jongwook.xyz/auth/authenticate', {  // Changed to actual secure endpoint
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { 
+            Authorization: `Bearer ${token}`,
+          "Origin": "https://api.jongwook.xyz"
+          },
           withCredentials: true,
         });
 
