@@ -6,10 +6,10 @@ import useAuthStore from '../stores/authStore';
 function Management() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);  // State to handle loading status
-  const { setAuthorized, clearToken, token } = useAuthStore((state) => ({
+  const { setAuthorized, clearToken, token } = useAuthStore((state) => ({  // Destructure store
     setAuthorized: state.setAuthorized,
     clearToken: state.clearToken,
-    token: state.token,
+    token: state.token
   }));
 
   useEffect(() => {
@@ -26,7 +26,7 @@ function Management() {
 
     const checkAuthorization = async () => {
       try {
-        const response = await axios.get('https://api.jongwook.xyz/authenticate', {  // Changed to actual secure endpoint
+        const response = await axios.get('https://api.jongwook.xyz/auth/authenticate', {  // Changed to actual secure endpoint
           headers: { Authorization: `Bearer ${token}` },
           withCredentials: true,
         });
@@ -44,7 +44,7 @@ function Management() {
 
     const refreshAccessToken = async () => {
       try {
-        const response = await axios.post('https://api.jongwook.xyz/auth/refresh', {}, { withCredentials: true });
+        const response = await axios.post('https://api.jongwook.xyz/auth/refresh', { withCredentials: true });
 
         if (response.data.status === "성공") {
           useAuthStore.getState().setToken(response.data.access_token);  // Update token in store
@@ -62,7 +62,7 @@ function Management() {
 
     initializeAuth();  // Initialize authentication check
 
-  }, [token, setAuthorized, clearToken, router]);
+  }, []);
 
   const handleLogout = () => {
     clearToken();
