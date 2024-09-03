@@ -5,7 +5,7 @@ import useAuthStore from '../stores/authStore';
 
 function Management() {
   const router = useRouter();
-  const [loading, setLoading] = useState(true);  // State to handle loading status
+  const [loading, setLoading] = useState(true);  
   const { setAuthorized, clearToken, token } = useAuthStore((state) => ({
     setAuthorized: state.setAuthorized,
     clearToken: state.clearToken,
@@ -15,33 +15,30 @@ function Management() {
   useEffect(() => {
     const initializeAuth = async () => {
       if (!token) {
-        // No token available, attempt to refresh
         await refreshAccessToken();
       } else {
-        // Validate the existing token
         await checkAuthorization();
       }
-      setLoading(false);  // Set loading to false after initialization
+      setLoading(false);
     };
 
     const checkAuthorization = async () => {
       try {
-        const response = await axios.get('https://api.jongwook.xyz/auth/authenticate', {  // Changed to actual secure endpoint
+        const response = await axios.get('https://api.jongwook.xyz/auth/authenticate', {  
           headers: { 
-            Authorization: `Bearer ${token}`,
-          "Origin": "https://api.jongwook.xyz"
+            Authorization: `Bearer ${token}`
           },
           withCredentials: true,
         });
 
         if (response.data.status === "성공") {
-          setAuthorized(true);  // User is authorized
+          setAuthorized(true);  
         } else {
-          await refreshAccessToken();  // Attempt to refresh the token if not authorized
+          await refreshAccessToken();  
         }
       } catch (error) {
         console.error('Error checking authorization:', error);
-        await refreshAccessToken();  // Refresh token on error
+        await refreshAccessToken();  
       }
     };
 
@@ -50,11 +47,11 @@ function Management() {
         const response = await axios.post('https://api.jongwook.xyz/auth/refresh', {}, { withCredentials: true });
 
         if (response.data.status === "성공") {
-          useAuthStore.getState().setToken(response.data.access_token);  // Update token in store
-          setAuthorized(true);  // Set authorized to true
+          useAuthStore.getState().setToken(response.data.access_token);  
+          setAuthorized(true);  
         } else {
-          clearToken();  // Clear token on failure
-          router.push('/admin');  // Redirect to login
+          clearToken();  
+          router.push('/admin');  
         }
       } catch (error) {
         console.error('Error refreshing token:', error);
@@ -63,7 +60,7 @@ function Management() {
       }
     };
 
-    initializeAuth();  // Initialize authentication check
+    initializeAuth();  
 
   }, [token, setAuthorized, clearToken, router]);
 
@@ -73,7 +70,7 @@ function Management() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;  // Display loading state while checking authentication
+    return <div>Loading...</div>;  
   }
 
   if (!useAuthStore.getState().authorized) {
