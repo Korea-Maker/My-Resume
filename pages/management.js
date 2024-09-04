@@ -64,9 +64,15 @@ function Management() {
 
   }, [token, setAuthorized, clearToken, router]);
 
-  const handleLogout = () => {
-    clearToken();
-    router.push('/admin');
+  const handleLogout = async () => {
+    try{
+      await axios.post('https://api.jongwook.xyz/auth/logout', {}, { withCredentials: true });
+      clearToken();
+      router.push('/admin');
+    }
+    catch (error) {
+      console.error('Error logging out:', error);
+    }
   };
 
   if (loading) {
