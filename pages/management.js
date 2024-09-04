@@ -62,7 +62,7 @@ function Management() {
 
     initializeAuth();  
 
-  }, [token, setAuthorized, clearToken, router]);
+  }, [setAuthorized, token, router]);
 
   const handleLogout = async () => {
     try{
