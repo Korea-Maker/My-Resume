@@ -2,7 +2,7 @@ import create from 'zustand';
 import cookies from 'js-cookie';
 
 const useAuthStore = create((set) => ({
-  token: null,  // Initialize token in memory, but not persisted
+  token: null,
   authorized: false,
 
   setToken: (newToken) => {

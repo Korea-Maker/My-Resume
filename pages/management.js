@@ -6,10 +6,11 @@ import useAuthStore from '../stores/authStore';
 function Management() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);  
-  const { setAuthorized, clearToken, token } = useAuthStore((state) => ({
+  const { setAuthorized, clearToken, token, setToken } = useAuthStore((state) => ({
     setAuthorized: state.setAuthorized,
     clearToken: state.clearToken,
     token: state.token,
+    setToken: state.setToken,
   }));
 
   useEffect(() => {
