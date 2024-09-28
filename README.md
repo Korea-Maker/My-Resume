@@ -1,40 +1,48 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AI 챗봇 기반 대화형 이력서 홈페이지
 
-## Getting Started
+이 프로젝트는 Next.js를 사용하여 개발된 AI 챗봇 기반의 대화형 이력서 웹사이트입니다. 사용자는 챗봇과 대화하며 개인의 경력, 기술, 프로젝트 경험 등을 자연스럽게 탐색할 수 있습니다.
 
-First, run the development server:
+## 주요 기능
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- AI 챗봇을 통한 대화형 이력서 탐색
+- 사용자 질문에 대한 맞춤형 응답 제공
+- 실시간 대화 기록 및 저장
+- 반응형 디자인으로 모바일 지원
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 기술 스택
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- Next.js
+- React
+- OpenAI API
+- Vercel (배포)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## 설치 및 실행 방법
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. 저장소 클론:
+   ```bash
+   git clone https://github.com/Korea-Maker/My-Resume.git
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. 의존성 설치:
+   ```bash
+   cd My-Resume
+   npm install
+   ```
 
-## Learn More
+3. 개발 서버 실행:
+   ```bash
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. 빌드 및 배포:
+   ```bash
+   npm run build
+   npm start
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 프로젝트 구조
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- `pages/`: 라우팅 및 페이지 컴포넌트
+- `components/`: 재사용 가능한 UI 컴포넌트
+- `styles/`: CSS 및 스타일 관련 파일
+- `public/`: 정적 파일 (이미지, 폰트 등)
